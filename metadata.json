@@ -1,0 +1,5 @@
+{
+  "name": "AI Fitness Meal Planner",
+  "description": "A specialized AI coach that generates personalized fitness meal plans based on your goals and dietary needs. Features a simulated premium subscription to unlock weekly plans.",
+  "requestFramePermissions": []
+}
