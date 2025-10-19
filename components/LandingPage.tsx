@@ -1,156 +1,146 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import { NavBar } from './NavBar';
-import { Footer } from './Footer';
-import { TargetIcon, LeafIcon, ChefHatIcon } from './icons';
+// FIX: Import missing icons
+import { DumbbellIcon, TargetIcon, LeafIcon, ChefHatIcon } from './icons';
 
 interface LandingPageProps {
-  onStart: () => void;
+  onGetStarted: () => void;
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
+const featureVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
     y: 0,
-    opacity: 1,
     transition: {
-      duration: 0.5,
-    },
-  },
+      delay: i * 0.1,
+      duration: 0.5
+    }
+  })
 };
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  },
-};
+export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
+    return (
+        <main>
+            {/* Hero Section */}
+            <section className="text-center container mx-auto max-w-4xl px-4 pt-20 pb-16 md:pt-32 md:pb-24">
+                 <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex justify-center items-center mb-6"
+                >
+                    <DumbbellIcon className="h-12 w-12 text-primary" />
+                </motion.div>
+                <motion.h1 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="text-4xl md:text-6xl font-extrabold tracking-tighter text-foreground mb-6 font-serif"
+                >
+                    Craft Your Perfect Meal Plan with AI
+                </motion.h1>
+                <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
+                >
+                    Stop guessing. Start achieving. Tell us your goals, and let our AI craft a delicious, personalized meal plan to help you succeed.
+                </motion.p>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                    <button
+                        onClick={onGetStarted}
+                        className="bg-primary text-primary-foreground font-bold py-3 px-8 rounded-lg hover:bg-primary/90 transition-colors duration-200 shadow-lg text-lg"
+                    >
+                        Create My Plan Now
+                    </button>
+                </motion.div>
+            </section>
+            
+            <div className="container mx-auto max-w-5xl px-4 space-y-24 py-16">
+                 {/* Features Section */}
+                <motion.section 
+                    id="features" 
+                    className="text-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ staggerChildren: 0.1 }}
+                >
+                    <motion.h2 variants={featureVariants} custom={0} className="text-3xl font-bold mb-4">A Smarter Way to Eat</motion.h2>
+                    <motion.p variants={featureVariants} custom={1} className="text-muted-foreground max-w-2xl mx-auto mb-12">
+                        Everything you need to reach your fitness goals, powered by Google Gemini.
+                    </motion.p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <motion.div variants={featureVariants} custom={2} className="p-6 bg-card rounded-xl border border-border shadow-md text-center flex flex-col items-center">
+                            <TargetIcon className="h-10 w-10 text-primary mb-4" />
+                            <h3 className="font-bold text-lg mb-2">Personalized Plans</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Get meal plans tailored to your specific calorie needs, dietary restrictions, and fitness goals.
+                            </p>
+                        </motion.div>
+                        <motion.div variants={featureVariants} custom={3} className="p-6 bg-card rounded-xl border border-border shadow-md text-center flex flex-col items-center">
+                            <LeafIcon className="h-10 w-10 text-primary mb-4" />
+                            <h3 className="font-bold text-lg mb-2">Detailed Nutrition</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Each meal comes with a full breakdown of calories, protein, carbs, and fat.
+                            </p>
+                        </motion.div>
+                        <motion.div variants={featureVariants} custom={4} className="p-6 bg-card rounded-xl border border-border shadow-md text-center flex flex-col items-center">
+                            <ChefHatIcon className="h-10 w-10 text-primary mb-4" />
+                            <h3 className="font-bold text-lg mb-2">Multi-Day Planning</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Upgrade to premium to generate plans for up to a full week, saving you time and effort.
+                            </p>
+                        </motion.div>
+                    </div>
+                </motion.section>
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
-  return (
-    <div className="bg-background text-foreground flex flex-col min-h-screen">
-      <NavBar onStart={onStart} />
-      
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="text-center py-20 md:py-32">
-          <motion.div
-            className="container mx-auto max-w-4xl px-4"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h1 
-              className="text-4xl md:text-6xl font-bold font-serif text-foreground"
-              variants={itemVariants}
-            >
-              Fuel Your Ambition.
-            </motion.h1>
-            <motion.h2 
-              className="text-4xl md:text-6xl font-bold font-serif text-primary mt-2"
-              variants={itemVariants}
-            >
-              Perfectly Planned.
-            </motion.h2>
-            <motion.p 
-              className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground"
-              variants={itemVariants}
-            >
-              AI-powered meal plans designed for your unique fitness goals. Stop guessing, start achieving.
-            </motion.p>
-            <motion.div className="mt-10" variants={itemVariants}>
-              <button
-                onClick={onStart}
-                className="bg-primary text-primary-foreground font-bold py-3 px-8 rounded-lg hover:bg-primary/90 transition-colors duration-200 shadow-md text-lg"
-              >
-                Create Your Free Plan Now
-              </button>
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* Features Section */}
-        <motion.section 
-          id="features" 
-          className="py-20 bg-muted border-y border-border"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
-        >
-          <div className="container mx-auto max-w-4xl px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Tailored Nutrition at Your Fingertips</h2>
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div className="flex flex-col items-center">
-                <div className="bg-primary/10 text-primary p-4 rounded-full mb-4">
-                  <TargetIcon />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">Personalized Goals</h3>
-                <p className="text-muted-foreground text-sm">Whether you want to lose weight, gain muscle, or maintain, our AI crafts the perfect plan for you.</p>
-              </div>
-              <div className="flex flex-col items-center">
-                 <div className="bg-primary/10 text-primary p-4 rounded-full mb-4">
-                  <LeafIcon />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">Dietary Freedom</h3>
-                <p className="text-muted-foreground text-sm">Vegetarian, vegan, gluten-free, and more. Your dietary needs are always our priority.</p>
-              </div>
-              <div className="flex flex-col items-center">
-                 <div className="bg-primary/10 text-primary p-4 rounded-full mb-4">
-                  <ChefHatIcon />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">Delicious Variety</h3>
-                <p className="text-muted-foreground text-sm">Say goodbye to boring meals. Discover new, easy-to-make recipes that you'll actually enjoy.</p>
-              </div>
+                {/* How It Works Section */}
+                <motion.section 
+                    id="how-it-works" 
+                    className="text-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ staggerChildren: 0.1 }}
+                >
+                    <motion.h2 variants={featureVariants} custom={0} className="text-3xl font-bold mb-12">Three Simple Steps</motion.h2>
+                    <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-left relative">
+                        {/* Dashed line for desktop */}
+                        <div className="hidden md:block absolute top-6 left-0 w-full h-px bg-transparent">
+                          <svg width="100%" height="100%"><line x1="0" y1="0" x2="100%" y2="0" strokeWidth="2" stroke="var(--border)" strokeDasharray="8, 8"></line></svg>
+                        </div>
+                        <motion.div variants={featureVariants} custom={1} className="flex flex-col items-center text-center z-10">
+                            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground font-bold text-lg mb-4 border-4 border-background">1</div>
+                            <h3 className="font-bold mb-2">Set Preferences</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Fill out the simple form with your goals, calorie targets, and dietary needs.
+                            </p>
+                        </motion.div>
+                        <motion.div variants={featureVariants} custom={2} className="flex flex-col items-center text-center z-10">
+                            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground font-bold text-lg mb-4 border-4 border-background">2</div>
+                            <h3 className="font-bold mb-2">Generate Plan</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Our AI, powered by Gemini, will instantly create a custom meal plan for you.
+                            </p>
+                        </motion.div>
+                        <motion.div variants={featureVariants} custom={3} className="flex flex-col items-center text-center z-10">
+                            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary text-primary-foreground font-bold text-lg mb-4 border-4 border-background">3</div>
+                            <h3 className="font-bold mb-2">Reach Goals</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Follow your delicious and easy-to-make plan to achieve your fitness dreams.
+                            </p>
+                        </motion.div>
+                    </div>
+                </motion.section>
             </div>
-          </div>
-        </motion.section>
-
-        {/* How It Works Section */}
-        <motion.section 
-          id="how-it-works" 
-          className="py-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
-        >
-          <div className="container mx-auto max-w-4xl px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Get Your Plan in 3 Simple Steps</h2>
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
-              <div className="text-center md:text-left flex-1">
-                <p className="text-6xl font-serif font-bold text-primary/20 mb-2">1</p>
-                <h3 className="font-semibold text-lg mb-2">Tell Us About You</h3>
-                <p className="text-muted-foreground text-sm">Quickly input your goals, calorie targets, and dietary restrictions in our simple form.</p>
-              </div>
-               <div className="text-center md:text-left flex-1">
-                <p className="text-6xl font-serif font-bold text-primary/20 mb-2">2</p>
-                <h3 className="font-semibold text-lg mb-2">AI Generates Your Plan</h3>
-                <p className="text-muted-foreground text-sm">Our powerful Gemini-powered AI analyzes your data to create a balanced and effective meal plan.</p>
-              </div>
-               <div className="text-center md:text-left flex-1">
-                <p className="text-6xl font-serif font-bold text-primary/20 mb-2">3</p>
-                <h3 className="font-semibold text-lg mb-2">Start Your Journey</h3>
-                <p className="text-muted-foreground text-sm">Receive your detailed plan instantly and start working towards a healthier you.</p>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-      </main>
-
-      <Footer />
-    </div>
-  );
+        </main>
+    );
 };

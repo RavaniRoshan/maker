@@ -1,21 +1,14 @@
 import React from 'react';
-import { DumbbellIcon } from './icons';
 
-interface HeaderProps {
-    onHomeClick: () => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
+export const Header: React.FC = () => {
   return (
-    <header className="bg-card shadow-sm border-b border-border">
-      <div className="container mx-auto max-w-4xl px-4 py-4 flex items-center justify-center md:justify-start">
-        <button onClick={onHomeClick} className="flex items-center group focus:outline-none focus:ring-2 focus:ring-ring rounded-lg p-2 -m-2">
-            <DumbbellIcon />
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground ml-3 transition-colors group-hover:text-primary">
-            AI Fitness Meal Planner
-            </h1>
-        </button>
-      </div>
+    <header className="text-center py-12 md:py-16">
+      <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-foreground mb-4">
+        Your Personal AI Meal Planner
+      </h1>
+      <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Tell us your goals, and let Gemini craft a delicious, personalized meal plan to help you succeed.
+      </p>
     </header>
   );
 };

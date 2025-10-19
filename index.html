@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Fitness Meal Planner</title>
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --background: rgb(250, 247, 245);
@@ -39,19 +37,47 @@
       --font-sans: 'Poppins', sans-serif;
       --font-serif: 'Libre Baskerville', serif;
     }
-    html {
-      font-family: var(--font-sans);
-      scroll-behavior: smooth;
+
+    .dark {
+      --background: rgb(28, 25, 23);
+      --foreground: rgb(245, 245, 244);
+      --card: rgb(41, 37, 36);
+      --card-foreground: rgb(245, 245, 244);
+      --popover: rgb(41, 37, 36);
+      --popover-foreground: rgb(245, 245, 244);
+      --primary: rgb(185, 28, 28);
+      --primary-foreground: rgb(250, 247, 245);
+      --secondary: rgb(146, 64, 14);
+      --secondary-foreground: rgb(254, 243, 199);
+      --muted: rgb(31, 28, 26);
+      --muted-foreground: rgb(214, 211, 209);
+      --accent: rgb(180, 83, 9);
+      --accent-foreground: rgb(254, 243, 199);
+      --destructive: rgb(239, 68, 68);
+      --destructive-foreground: rgb(255, 255, 255);
+      --border: rgb(68, 64, 60);
+      --input: rgb(68, 64, 60);
+      --ring: rgb(185, 28, 28);
+      --chart-1: rgb(248, 113, 113);
+      --chart-2: rgb(239, 68, 68);
+      --chart-3: rgb(220, 38, 38);
+      --chart-4: rgb(251, 191, 36);
+      --chart-5: rgb(245, 158, 11);
     }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
     body {
-      margin: 0;
-      background-color: var(--background);
+        font-family: var(--font-sans);
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
   </style>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
@@ -73,7 +99,7 @@
               foreground: "var(--destructive-foreground)",
             },
             muted: {
-              DEFAULT: "var(--muted)",
+                DEFAULT: "var(--muted)",
               foreground: "var(--muted-foreground)",
             },
             accent: {
@@ -107,9 +133,11 @@
           },
         },
       },
-    };
+    }
   </script>
-  
+</head>
+<body>
+  <div id="root"></div>
   <script type="importmap">
   {
     "imports": {
@@ -117,14 +145,10 @@
       "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
       "react/": "https://aistudiocdn.com/react@^19.2.0/",
       "@google/genai": "https://aistudiocdn.com/@google/genai@^1.25.0",
-      "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.19"
+      "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
     }
   }
   </script>
-
-</head>
-<body>
-  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
 </html>
